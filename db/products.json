@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "name": "Product A",
+    "price": 10,
+    "image": "image_a.jpg",
+    "store_id": 1
+  },
+  {
+    "name": "Hamburgesa",
+    "price": "12345",
+    "description": "asasdasd",
+    "image": "/uploads/1756474644880-140203619.png"
+  }
+]

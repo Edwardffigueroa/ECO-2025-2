@@ -4,11 +4,7 @@ GET http://localhost:5050/users
 
 ###
 
-GET http://localhost:5050/obtener?search=hola&age=20
-
-###
-
-POST http://localhost:5050/crear 
+POST http://localhost:5050/users 
 Content-Type: application/json
 
 {
@@ -25,5 +21,5 @@ Content-Type: application/json
 {
     "name": "Edwar 2",
     "age": 28,
-    "job": "UI developer"
+    "job": "UI developer",
 }
