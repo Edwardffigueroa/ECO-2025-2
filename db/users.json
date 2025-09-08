@@ -1,17 +1,13 @@
 [
   {
-    "username": "edwar",
-    "password": "1234",
-    "role": "store"
-  },
-  {
-    "username": "maria",
-    "password": "213",
-    "role": "client"
-  },
-  {
-    "username": "maria",
-    "password": "213",
-    "role": "rider"
+    "id": 1,
+    "name": "Example user",
+    "balance": 1000,
+    "bids": [
+      {
+        "itemId": 2,
+        "amount": 300
+      }
+    ]
   }
 ]
