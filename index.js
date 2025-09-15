@@ -1,18 +1,45 @@
-const express = require("express")
-const path = require("path")
-const db = require("./db-util")
+const express = require("express");
+const path = require("path");
+const { Server } = require("socket.io");
+const { createServer } = require("http");
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use("/players-app", express.static(path.join(__dirname, "players_app"))) 
-app.use("/monitor-app", express.static(path.join(__dirname, "monitor_app")))
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  path: "/real-time",
+  cors: {
+    origin: "*",
+  },
+});
+
+app.use(express.json());
+app.use("/app1", express.static(path.join(__dirname, "app1")));
+app.use("/app2", express.static(path.join(__dirname, "app2")));
+
+let users = [
+  {
+    id: 1,
+    name: "John Doe",
+  },
+];
 
 app.get("/users", (req, res) => {
-  const users = db.load("users")
-  res.status(200).send(users)
-})
+  res.send(users);
+});
 
-app.listen(5080, () => {
-  console.log("Server is running on http://localhost:5080")
-})
+app.post("/users", (req, res) => {
+  const { id, name } = req.body;
+  users.push({ id, name });
+  res.send(users);
+});
+
+app.post("/change-screen", (req, res) => {
+  io.emit("next-screen");
+  res.send({ message: "Cambio de pantalla exitoso" });
+});
+
+httpServer.listen(5050, () =>
+  console.log(`Server running at http://localhost:${5050}`)
+);
