@@ -1,12 +1,16 @@
 const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
+const cors = require("cors");
 
 const usersRouter = require("./server/routes/users.router");
 const screen1EventsRouter = require("./server/routes/screen1Events.router");
 const { initSocketInstance } = require("./server/services/socket.service");
 
 const PORT = 5050;
+
+//cors
+app.use(cors())
 
 const app = express();
 const httpServer = createServer(app);
