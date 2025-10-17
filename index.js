@@ -1,17 +1,28 @@
-const express = require("express")
-const path = require("path")
+const express = require("express");
+const path = require("path");
+const { createServer } = require("http");
 
-const app = express()
+const usersRouter = require("./server/routes/users.router");
+const screen1EventsRouter = require("./server/routes/screen1Events.router");
+const { initSocketInstance } = require("./server/services/socket.service");
 
-app.use(express.json())
-app.use("/app1", express.static(path.join(__dirname, "app1")))
-app.use("/app2", express.static(path.join(__dirname, "app2")))
-app.use("/app3", express.static(path.join(__dirname, "app3")))
+const PORT = 5050;
 
-let users = []
+const app = express();
+const httpServer = createServer(app);
 
-app.get("/users", (req, res) => { 
-  res.status(200).send(users)
-})
+// Middlewares
+app.use(express.json());
+app.use("/app1", express.static(path.join(__dirname, "app1")));
+app.use("/app2", express.static(path.join(__dirname, "app2")));
 
-app.listen(5050)
+// Routes
+app.use("/", usersRouter);
+app.use("/", screen1EventsRouter);
+
+// Services
+initSocketInstance(httpServer);
+
+httpServer.listen(PORT, () =>
+  console.log(`Server running at http://localhost:${PORT}`)
+);
