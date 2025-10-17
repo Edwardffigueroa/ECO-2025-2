@@ -9,11 +9,13 @@ const { initSocketInstance } = require("./server/services/socket.service");
 
 const PORT = 5050;
 
-//cors
-app.use(cors())
+
 
 const app = express();
 const httpServer = createServer(app);
+
+//cors
+app.use(cors())
 
 // Middlewares
 app.use(express.json());
