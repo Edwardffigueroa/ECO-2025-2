@@ -8,7 +8,6 @@ export default function renderScreen1() {
         <p>Hello from screen 1</p>
       </div>
       `;
-
   socket.on("next-screen", (data) => {
     navigateTo("/screen2", { name: "Hola" });
   });

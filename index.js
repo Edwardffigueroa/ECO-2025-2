@@ -1,30 +1,24 @@
 const express = require("express");
 const path = require("path");
 const { createServer } = require("http");
-const cors = require("cors");
 
-const usersRouter = require("./server/routes/users.router");
-const screen1EventsRouter = require("./server/routes/screen1Events.router");
+const playersRouter = require("./server/routes/players.router");
+const gameRouter = require("./server/routes/game.router");
 const { initSocketInstance } = require("./server/services/socket.service");
 
 const PORT = 5050;
 
-
-
 const app = express();
 const httpServer = createServer(app);
 
-//cors
-app.use(cors())
-
 // Middlewares
 app.use(express.json());
-app.use("/app1", express.static(path.join(__dirname, "app1")));
-app.use("/app2", express.static(path.join(__dirname, "app2")));
+app.use("/game", express.static(path.join(__dirname, "game")));
+app.use("/results", express.static(path.join(__dirname, "results-screen")));
 
 // Routes
-app.use("/", usersRouter);
-app.use("/", screen1EventsRouter);
+app.use("/api", playersRouter);
+app.use("/api/game", gameRouter);
 
 // Services
 initSocketInstance(httpServer);
