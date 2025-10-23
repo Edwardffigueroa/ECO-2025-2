@@ -1,6 +1,6 @@
 import renderScreen1 from "./screens/screen1.js";
 
-const socket = io("/", { path: "/real-time" });
+// const socket = io("/", { path: "/real-time" });
 
 function clearScripts() {
   document.getElementById("app").innerHTML = "";
@@ -37,4 +37,4 @@ async function makeRequest(url, method, body) {
   return response;
 }
 
-export { navigateTo, socket, makeRequest };
+export { navigateTo, makeRequest };

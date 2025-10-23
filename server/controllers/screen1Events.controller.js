@@ -1,7 +1,7 @@
 const { emitEvent } = require("../services/socket.service");
 
-const handleChangeScreenEvent = (req, res) => {
-  emitEvent("next-screen");
+const handleChangeScreenEvent = async (req, res) => {
+  await emitEvent("next-screen");
   res.send({ message: "Cambio de pantalla exitoso" });
 };
 
