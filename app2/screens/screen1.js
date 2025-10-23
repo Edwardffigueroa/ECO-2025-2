@@ -13,7 +13,11 @@ export default function renderScreen1() {
   //   navigateTo("/screen2", { name: "Hola" });
   // });
 
-  channel.on("broadcast", { event: "next-screen" }, (data) => {
-    navigateTo("/screen2", { name: "Hola" });
-  });
+  channel
+    .on("broadcast", { event: "next-screen" }, (data) => {
+      console.log("llegó");
+
+      navigateTo("/screen2", { name: "Hola" });
+    })
+    .subscribe();
 }
